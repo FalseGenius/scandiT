@@ -11,7 +11,7 @@ function Home() {
   const [{allData, clicked}, dispatch] = useStateValue();
   const getData = async () => {
     // await axios.get('http://localhost:7882/api/products/').then((res) => {
-    await axios.get('http://juniordevv.online/api/products.com').then((res) => {
+    await axios.get('https://juniordevv.online/api/products.com').then((res) => {
       // setData(res.data);
       dispatch({
         type: 'ADD_ALL',
