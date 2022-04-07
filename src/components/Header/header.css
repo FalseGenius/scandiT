@@ -1,0 +1,39 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  top: 0;
+  border-bottom: 2px solid black;
+  margin: 25px 25px 5px 25px;
+  position: sticky;
+  z-index: 100;
+  background-color: white;
+  height: 50px;
+}
+
+.headerLeft {
+  margin-right: 15px;
+}
+
+.headerLeft > button {
+  box-shadow: 3px 3px;
+  background-color: white;
+  padding: 2px 5px;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+
+}
+
+.headerLeft > button:hover {
+  box-shadow: none;
+  transition: all 0.3s ease-in;
+}
+
+.clicked {
+  box-shadow: none;
+  transition: all 0.3s ease-in-out;
+}
+
+#delete-product-btn {
+  margin-left: 20px;
+}

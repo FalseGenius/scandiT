@@ -1,0 +1,44 @@
+.productAdd {
+  padding: 25px;
+  width: 20%;
+}
+
+.fieldsUp {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.fieldsUp > h3 {
+  /* margin-right: 50px; */
+  flex: 0.5;
+}
+
+.fieldsUp > input {
+  flex: 0.7;
+  padding: 5px;
+  outline: none;
+  /* margin-left: -20px; */
+}
+
+.typeField {
+  margin: 50px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.typeField > select {
+  flex: 0.7;
+}
+
+.typeField > label {
+  margin-right: 20px;
+  font-weight: 700;
+  font-size: 17px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0 !important;
+}
