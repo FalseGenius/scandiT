@@ -4,58 +4,50 @@ import {useNavigate} from 'react-router-dom';
 import {useStateValue} from '../../StateProvider';
 import axios from 'axios';
 
-function Header({data, setData, title, button1, button2, cancel}) {
+function Header({pointer, set, data, setData, title, button1, button2, cancel}) {
   const [{clicked,  allData, checked}, dispatch] = useStateValue();
-
   const navigate = useNavigate();
-  const post = () => {
-    console.log(data);
 
-    axios.post('https://juniordevv.online/api/product', data)
-    .then(result => {
-      if (result.data.Status != 'Invalid') navigate('/');
-
-    });
-
-    dispatch({
-      type: 'EMPTY'
+  const getData = async () => {
+    // await axios.get('http://localhost:7882/api/products/').then((res) => {
+    await axios.get('https://juniordevv.online/api/products').then((res) => {
+      // setData(res.data);
+      dispatch({
+        type: 'ADD_ALL',
+        all: res.data
+      })
     })
+    }
 
-  }
-  // http://localhost:7882/api/products/
   const massDelete = async () => {
+    let setter = false;
+    let last = checked[checked.length-1];
     await checked.map( async (item) => {
+      if (item === last) setter = true;
       await axios.delete(`https://juniordevv.online/api/product/${item}`).then(res => {
       // axios.delete(`http://localhost:7882/api/product/${item}`).then(res => {
         console.log('Successfully deleted the user');
         // dat();
-      }).then(res => {
-        window.location.reload(false);
-      })
+        }
+
+      )
       .catch(error => console.log(error))
-    })
 
-    dispatch({
+      if (setter) getData();
+    }
+
+    )
+
+    await dispatch({
       type: 'EMPTY_CHECKED',
+      clicked: !clicked
     });
-
-
-    // dispatch({
-    //   type: 'CLICKED',
-    //   change: !clicked
-    // })
-    // window.location.reload(false);
   }
-
   const handleCancel = () => {
     console.log('cancel0');
     setData({...data, selected: ''});
     navigate('/');
   }
-
-  // <button onClick={() => cancel=== false ? navigate('/addproduct') : post()}>{button1}</button>
-  // <button form='product_form' type='submit' onClick={() => cancel=== false ? navigate('/addproduct') : post()}>{button1}</button>
-
   return (
     <div className='header'>
       <h1>{title}</h1>

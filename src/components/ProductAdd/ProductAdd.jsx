@@ -14,19 +14,33 @@ function ProductAdd({data, setData}) {
   const {register, handleSubmit, watch, formState:{errors}} = useForm();
 
   const handleChange = (e) => {
-    const value = e.target.value;
-    setData({...data, [e.target.name]: value});
+    // const value = e.target.value;
+    setData({...data, [e.target.name]: e.target.value});
   };
 
   const post = () => {
+    // axios.post('http://localhost:7882/api/product', data)
     axios.post('https://juniordevv.online/api/product', data)
     .then(result => {
       if (result.data.Status != 'Invalid') navigate('/');
-    });
+    }).catch(err => console.log(err));
     dispatch({
       type: 'EMPTY'
     })
-    setData({...data, selected: ''});
+    // setData({...data, selected: ''});
+    setData(
+      {
+        selected: '',
+        sku: '',
+        name: '',
+        price: '',
+        size: '',
+        weight: '',
+        height: '',
+        width: '',
+        length: ''
+      }
+    )
   }
 
   return (
@@ -58,12 +72,37 @@ function ProductAdd({data, setData}) {
         </div>
 
         {data.selected === 'DVD'
-          ? <DVD set={handleChange} />
+          ?
+          <>
+            <div className='fieldsUp'>
+              <h3>Size (MB)</h3>
+              <input {...register('size', {required:true})} name='size' onChange={handleChange} id='size' type='number' placeholder='#size'/>
+            </div>
+            <span style={{fontStyle: 'italic'}}>Please provide size (in MB)</span>
+          </>
           :
           data.selected === 'Furniture'
-          ? <Furniture  handle={handleChange}/>
+          ?
+          <>
+            <div id='Furniture' className='fieldsUp'>
+              <h3>Height (CM)</h3>
+              <input {...register('height', {required:true})} name='height' onChange={handleChange} id='height' type='number' placeholder='#height'/>
+            </div>
+
+            <div className='fieldsUp'>
+              <h3>Width (CM)</h3>
+              <input {...register('width', {required:true})} name='width' onChange={handleChange} id='width' type='number' placeholder='#width'/>
+            </div>
+
+            <div className='fieldsUp'>
+              <h3>Length (CM)</h3>
+              <input {...register('length', {required:true})} name='length' onInput={handleChange} id='length' type='number' placeholder='#Length'/>
+            </div>
+            <span style={{fontStyle: 'italic'}}>Please provide dimensions in HxWxL format</span>
+          </>
           :
-          data.selected === 'Book' ? <Book  set={handleChange}/>
+          data.selected === 'Book' ?
+          <Book  set={handleChange}/>
           :
           ''
         }
@@ -73,3 +112,24 @@ function ProductAdd({data, setData}) {
 }
 
 export default ProductAdd;
+
+// <div id='Book'>
+//   <div className='fieldsUp'>
+//     <h3>Weight (KG)</h3>
+//     <input {...register('weight', {required:true})} name='weight' onChange={handleChange} id='weight' type='number'  placeholder='#Weight'/>
+//   </div>
+//   <span style={{fontStyle: 'italic'}}>Please provide Weight (in Kg)</span>
+// </div>
+//
+
+
+// {data.selected === 'DVD'
+//   ? <DVD set={handleChange} />
+//   :
+//   data.selected === 'Furniture'
+//   ? <Furniture  handle={handleChange}/>
+//   :
+//   data.selected === 'Book' ? <Book  set={handleChange}/>
+//   :
+//   ''
+// }

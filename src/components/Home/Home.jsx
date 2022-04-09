@@ -6,9 +6,9 @@ import Product from '../Product/Product';
 import {useStateValue} from '../../StateProvider';
 
 
-function Home() {
+function Home({pointer}) {
   // const [data, setData] = useState([]);
-  const [{allData, clicked}, dispatch] = useStateValue();
+  const [{allData, clicked, checked}, dispatch] = useStateValue();
   const getData = async () => {
     // await axios.get('http://localhost:7882/api/products/').then((res) => {
     await axios.get('https://juniordevv.online/api/products').then((res) => {
@@ -22,12 +22,11 @@ function Home() {
 
   useEffect(() => {
     getData();
-  }, [clicked])
+  }, [])
 
-  console.log(clicked);
+
   return (
     <div className='home'>
-
       {allData.map((item, idx) => (
         <Product
           dat={getData}
@@ -43,9 +42,6 @@ function Home() {
           length={item.Length}
           />
       ))}
-
-
-
     </div>
   )
 }

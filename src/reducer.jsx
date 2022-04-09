@@ -4,17 +4,6 @@ export const initialState = {
   checked:[],
   clicked: false,
 };
-// data: {
-//   selected: '',
-//   sku: '',
-//   name: '',
-//   price: '',
-//   size: '',
-//   weight: '',
-//   height: '',
-//   width: '',
-//   length: ''
-// }
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -60,7 +49,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         checked: [],
-        clicked: !state.clicked
+        clicked: state.clicked
       }
 
     case 'DELETE':

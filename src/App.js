@@ -22,6 +22,8 @@ function App() {
     length: ''
   });
 
+  const [pointer, setPointer] = useState(false);
+
   // console.log(data);
   return (
     <Router>
@@ -29,12 +31,12 @@ function App() {
         <Routes>
 
           <Route path='/'
-            element={[<Header data={data} setData={setData} title='Product List' button1='ADD' button2='MASS DELETE' cancel={false}/>,
-            <Home />, <Footer footer={state.allData.length > 8 ? 'footer': 'footer3'}/>]}
+            element={[<Header pointer={pointer} set={setPointer} data={data} setData={setData} title='Product List' button1='ADD' button2='MASS DELETE' cancel={false}/>,
+          <Home pointer={pointer} />, <Footer footer={state.allData.length > 8 ? 'footer': 'footer3'}/>]}
           />
 
           <Route path='/addproduct'
-            element={[<Header data={data} setData={setData} title='Product Add' button1='Save' button2='Cancel' cancel={true}/>
+            element={[<Header pointer={pointer} set={setPointer} data={data} setData={setData} title='Product Add' button1='Save' button2='Cancel' cancel={true}/>
             ,<ProductAdd data={data} setData={setData} />, <Footer footer='footer2' />]} />
         </Routes>
       </div>
